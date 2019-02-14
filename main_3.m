@@ -4,7 +4,7 @@ close all
 % 
 
 
-%% Training and Testing a random Forest Classifier
+% Training and Testing a random Forest Classifier
 
 %% Loading the Data 
 load('mintsDataFinal2.mat');
@@ -15,7 +15,7 @@ trainingPercentage = 0.7;
 [trainInd , testInd] = dividerand(height(mints),trainingPercentage,1-trainingPercentage);
 
 
-[trainInputsMints,testinputsMints]   = getTrainingAndTestingTables(inputs,trainInd , testInd);
+[trainInputsMints,testInputsMints]   = getTrainingAndTestingTables(inputs,trainInd , testInd);
 
 [trainPm1Mints   ,testPm1Mints]   = getTrainingAndTestingTables(pm1Mints,trainInd , testInd);
 
@@ -23,10 +23,23 @@ trainingPercentage = 0.7;
 
 [trainPm10Mints  ,testPm10Mints]  = getTrainingAndTestingTables(pm10Mints,trainInd , testInd);
 
-% % %% PM 2.5 
-[regressionTreePm1,impPm1] = trainBaggedTree(trainPm1Mints,'pm1_grimm');
-[regressionTreePm2_5,impPm2_5] = trainBaggedTree(trainPm2_5Mints,'pm2_5_grimm');
-[regressionTreePm10,impPm10] = trainBaggedTree(trainPm2_5Mints,'pm10_grimm');
+regressionTreePm1   = trainBaggedTree(trainPm1Mints,'pm1_grimm');
+regressionTreePm2_5 = trainBaggedTree(trainPm2_5Mints,'pm2_5_grimm');
+regressionTreePm10  = trainBaggedTree(trainPm10Mints,'pm10_grimm');
  
- 
- 
+pm1TrainPrediction   = regressionTreePm1.predict(table2array(trainInputsMints)); 
+pm2_5TrainPrediction = regressionTreePm2_5.predict(table2array(trainInputsMints));
+pm10TrainPrediction  = regressionTreePm10.predict(table2array(trainInputsMints));
+
+pm1TestPrediction   = regressionTreePm1.predict(table2array(testInputsMints)); 
+pm2_5TestPrediction = regressionTreePm2_5.predict(table2array(testInputsMints));
+pm10TestPrediction  = regressionTreePm10.predict(table2array(testInputsMints));
+
+
+[trainMints,testMints]   = getTrainingAndTestingTables(mints,trainInd , testInd);
+
+trainWithPrediction = addvars(trainMints,pm1TrainPrediction,pm2_5TrainPrediction,pm10TrainPrediction);
+testWithPrediction  = addvars(testMints,pm1TestPrediction,pm2_5TestPrediction,pm10TestPrediction);
+
+
+ save mintsDataFinal3
