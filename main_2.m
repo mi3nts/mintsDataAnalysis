@@ -2,7 +2,7 @@ clc
 clear all
 close all
 
-load('mintsDataFinal.mat')
+load('mintsDataFinal1.mat')
 
 
 
