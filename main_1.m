@@ -53,23 +53,23 @@ VEML6070TT = table2timetable(concatDotMatsMints(dotMatsFolder,nodeID,"VEML6070",
 
 dt = seconds(10);
 
-grimmRetime  =  retime(grimmTT,'regular','linear','TimeStep',dt);
-OPCN3Retime  =  retime(OPCN3TT,'regular','linear','TimeStep',dt);
-BME280Retime =  retime(BME280TT,'regular','linear','TimeStep',dt);
-LIBRADRetime  =  retime(LIBRADTT,'regular','linear','TimeStep',dt);
-MGS001Retime  =  retime(MGS001TT,'regular','linear','TimeStep',dt);
-SCD30TTRetime  =  retime(SCD30TT,'regular','linear','TimeStep',dt);
-TSL2591Retime  =  retime(TSL2591TT,'regular','linear','TimeStep',dt);
-VEML6070Retime =  retime(VEML6070TT,'regular','linear','TimeStep',dt);
-
-
+grimmRetime     =  retime(grimmTT,'regular','linear','TimeStep',dt);
+OPCN3Retime     =  retime(OPCN3TT,'regular','linear','TimeStep',dt);
+BME280Retime    =  retime(BME280TT,'regular','linear','TimeStep',dt);
+LIBRADRetime    =  retime(LIBRADTT,'regular','linear','TimeStep',dt);
+MGS001Retime    =  retime(MGS001TT,'regular','linear','TimeStep',dt);
+SCD30TTRetime   =  retime(SCD30TT,'regular','linear','TimeStep',dt);
+TSL2591Retime   =  retime(TSL2591TT,'regular','linear','TimeStep',dt);
+VEML6070Retime  =  retime(VEML6070TT,'regular','linear','TimeStep',dt);
 
 
 TT1 = synchronize(grimmRetime,OPCN3Retime,'intersection');
 mints = synchronize(TT1,BME280Retime,'intersection');
 
+mints = getMovingAverage(mints,360);
 
-save mintsDataFinal 
+
+save mintsDataFinal1 
 
 % nodeDataFolder = dataFolder+  "/001e06323a06";
 % nodeDotMats   =  dotMatsFolder + "/OPCN3";
