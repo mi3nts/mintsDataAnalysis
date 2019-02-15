@@ -42,4 +42,21 @@ trainWithPrediction = addvars(trainMints,pm1TrainPrediction,pm2_5TrainPrediction
 testWithPrediction  = addvars(testMints,pm1TestPrediction,pm2_5TestPrediction,pm10TestPrediction);
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  save mintsDataFinal3

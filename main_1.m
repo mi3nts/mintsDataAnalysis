@@ -1,6 +1,3 @@
-clc 
-clear all
-close all
 
 
 %% P1 - Read Spectrometor Data - 
@@ -51,7 +48,6 @@ VEML6070TT = table2timetable(concatDotMatsMints(dotMatsFolder,nodeID,"VEML6070",
 
 
 
-dt = seconds(10);
 
 grimmRetime     =  retime(grimmTT,'regular','linear','TimeStep',dt);
 OPCN3Retime     =  retime(OPCN3TT,'regular','linear','TimeStep',dt);
@@ -66,8 +62,9 @@ VEML6070Retime  =  retime(VEML6070TT,'regular','linear','TimeStep',dt);
 TT1 = synchronize(grimmRetime,OPCN3Retime,'intersection');
 mints = synchronize(TT1,BME280Retime,'intersection');
 
-mints = getMovingAverage(mints,360);
-
+if(movingAverage)
+    mints = getMovingAverage(mints,countsMA);
+end
 
 save mintsDataFinal1 
 
