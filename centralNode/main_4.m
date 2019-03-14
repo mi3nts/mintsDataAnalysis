@@ -6,39 +6,86 @@
 
 %% Plotting Graphs 
 
-
-load('mintsDataFinal3.mat') 
-% 
+load(strcat("mints_3_",strrep(string(dt)," ","_"),"_Chuncks.mat"));
 % %% As Is Graphs 
-% 
-%     estimator = "pm2.5"
-%     summary   = "Uncalibrated Data" 
-%     dataX = mints.pm2_5_grimm;
-%     dataY = mints.pm2_5_OPCN3;
-%     limit= 30;
-%     drawScatterPlot(dataX,dataY,limit,nodeID,estimator, summary)
-% 
-%     % Initially draw y=t plot
-% 
-%    
-%     estimator = "pm2.5"
-%     summary   = "Training and Validation Data" 
-%     dataX = trainWithPrediction.pm2_5_grimm;
-%     dataY = trainWithPrediction.pm2_5TrainPrediction;
-%     limit= 20;
-%     drawScatterPlot(dataX,dataY,limit,nodeID,estimator, summary)
-%     
-%     
-%        
-%     estimator = "pm2.5"
-%     summary   = "Testing Data" 
-%     dataX = testWithPrediction.pm2_5_grimm;
-%     dataY = testWithPrediction.pm2_5TestPrediction;
-%     limit= 20;
-%     drawScatterPlot(dataX,dataY,limit,nodeID,estimator, summary)
-%     
+
+%% For PM 1  
+
+    estimator = "pm1"
+    summary   = strcat("Uncalibrated Data - ",string(dt)," Average") ;
+    eval(strcat("dataX = mints.",strrep(estimator,".","_"),"_grimm"));
+    eval(strcat("dataY = mints.",strrep(estimator,".","_"),"_OPCN3"));
+    eval(strcat("limit=max(mints.",strrep(estimator,".","_"),"_OPCN3)"));
+    drawScatterPlot(dataX,dataY,limit,nodeID,estimator,summary);
+
+    summary   = strcat("Training and Validation Data - ",string(dt)," Average") ;
+    eval(strcat("dataX = trainWithPrediction.",strrep(estimator,".","_"),"_grimm"));
+    eval(strcat("dataY = trainWithPrediction.",strrep(estimator,".","_"),"TrainPrediction"));
+    eval(strcat("limit=max(mints.",strrep(estimator,".","_"),"_grimm)"));
+    drawScatterPlot(dataX,dataY,limit,nodeID,estimator,summary);
+
+
+    summary   = strcat("Testing Data - ",string(dt)," Average") ;
+    eval(strcat("dataX = testWithPrediction.",strrep(estimator,".","_"),"_grimm"));
+    eval(strcat("dataY = testWithPrediction.",strrep(estimator,".","_"),"TestPrediction"));
+    eval(strcat("limit=max(mints.",strrep(estimator,".","_"),"_grimm)"));
+    drawScatterPlot(dataX,dataY,limit,nodeID,estimator,summary);
     
-%% Plotting Predictor Importaince 
+eval(strcat("drawPredictorImportaince(regressionTree",strrep(strrep(estimator,".","_"),"p","P"),",20,estimator,nodeID)"))
 
-drawPredictorImportaince(regressionTreePm2_5,15,"PM2.5",nodeID)
+    %% For PM 2.5  
 
+    estimator = "pm2.5"
+    summary   = strcat("Uncalibrated Data - ",string(dt)," Average") ;
+    eval(strcat("dataX = mints.",strrep(estimator,".","_"),"_grimm"));
+    eval(strcat("dataY = mints.",strrep(estimator,".","_"),"_OPCN3"));
+    eval(strcat("limit=max(mints.",strrep(estimator,".","_"),"_OPCN3)"));
+    drawScatterPlot(dataX,dataY,limit,nodeID,estimator,summary);
+
+    summary   = strcat("Training and Validation Data - ",string(dt)," Average") ;
+    eval(strcat("dataX = trainWithPrediction.",strrep(estimator,".","_"),"_grimm"));
+    eval(strcat("dataY = trainWithPrediction.",strrep(estimator,".","_"),"TrainPrediction"));
+    eval(strcat("limit=max(mints.",strrep(estimator,".","_"),"_grimm)"));
+    drawScatterPlot(dataX,dataY,limit,nodeID,estimator,summary)
+
+
+    summary   = strcat("Testing Data - ",string(dt)," Average") ;
+    eval(strcat("dataX = testWithPrediction.",strrep(estimator,".","_"),"_grimm"));
+    eval(strcat("dataY = testWithPrediction.",strrep(estimator,".","_"),"TestPrediction"));
+    eval(strcat("limit=max(mints.",strrep(estimator,".","_"),"_grimm)"));
+    drawScatterPlot(dataX,dataY,limit,nodeID,estimator,summary);
+   
+eval(strcat("drawPredictorImportaince(regressionTree",strrep(strrep(estimator,".","_"),"p","P"),",20,estimator,nodeID)"))
+ 
+%% For PM 10  
+    estimator = "pm10"
+    summary   = strcat("Uncalibrated Data - ",string(dt)," Average") ;
+    eval(strcat("dataX = mints.",strrep(estimator,".","_"),"_grimm"));
+    eval(strcat("dataY = mints.",strrep(estimator,".","_"),"_OPCN3"));
+    eval(strcat("limit=max(mints.",strrep(estimator,".","_"),"_OPCN3)"));
+    drawScatterPlot(dataX,dataY,limit,nodeID,estimator,summary)
+
+    summary   = strcat("Training and Validation Data - ",string(dt)," Average") ;
+    eval(strcat("dataX = trainWithPrediction.",strrep(estimator,".","_"),"_grimm"));
+    eval(strcat("dataY = trainWithPrediction.",strrep(estimator,".","_"),"TrainPrediction"));
+     limit=50
+    drawScatterPlot(dataX,dataY,limit,nodeID,estimator,summary)
+
+    summary   = strcat("Testing Data - ",string(dt)," Average") ;
+    eval(strcat("dataX = testWithPrediction.",strrep(estimator,".","_"),"_grimm"));
+    eval(strcat("dataY = testWithPrediction.",strrep(estimator,".","_"),"TestPrediction"));
+    eval(strcat("limit=max(mints.",strrep(estimator,".","_"),"_grimm)"));
+    limit=50
+    drawScatterPlot(dataX,dataY,limit,nodeID,estimator,summary);
+   
+    eval(strcat("drawPredictorImportaince(regressionTree",strrep(strrep(estimator,".","_"),"p","P"),",20,estimator,nodeID)"))    
+    
+
+   %% Plotting Predictor Importaince 
+   eval(strcat("save mints_4_",strrep(string(dt)," ","_"),"_Chuncks"))
+   
+
+   
+   
+   
+   

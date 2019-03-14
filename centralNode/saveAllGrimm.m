@@ -4,7 +4,8 @@ function [] = saveAllGrimm(dataFolder)
 
 dotMatFolder    = dataFolder + "/dotMats";
 grimmDataFolder = dataFolder + "/Spectrometor";
-grimmDataAll    = dir(grimmDataFolder);
+grimmDataAll    = dir(grimmDataFolder)
+
 grimmDataTable  = struct2table(grimmDataAll);
 grimmDataWanted = grimmDataTable(endsWith(grimmDataTable.name,'-M.dat'),:);
 

@@ -47,8 +47,8 @@ sortedPredictorLabels= regressionTree.PredictorNames(isortedImp);
         Fig_name = strrep(strcat(strrep(estimator,".","_"),"_Node_",string(nodeID),...
           "_PredictorImportance",'.fig')," ","_")
     saveas(figure_1,char(Fig_name));
-    
-    print('ScreenSizeFigure','-dpng','-r100')
+%     
+%     print('ScreenSizeFigure','-dpng','-r100')
     
 end
 

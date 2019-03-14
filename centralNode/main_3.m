@@ -1,13 +1,10 @@
-clc
-clear all 
-close all
-% 
+
 
 
 % Training and Testing a random Forest Classifier
 
 %% Loading the Data 
-load('mintsDataFinal2.mat');
+load(strcat("mints_2_",strrep(string(dt)," ","_"),"_Chuncks.mat"))
 
 %% Dividing to Training and Testing for PM1 PM2.5 and PM10 
 trainingPercentage = 0.7;
@@ -41,22 +38,4 @@ pm10TestPrediction  = regressionTreePm10.predict(table2array(testInputsMints));
 trainWithPrediction = addvars(trainMints,pm1TrainPrediction,pm2_5TrainPrediction,pm10TrainPrediction);
 testWithPrediction  = addvars(testMints,pm1TestPrediction,pm2_5TestPrediction,pm10TestPrediction);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- save mintsDataFinal3
+eval(strcat("save mints_3_",strrep(string(dt)," ","_"),"_Chuncks"))
