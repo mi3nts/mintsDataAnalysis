@@ -30,7 +30,7 @@ dataFolder = mD.dataFolder
 
 def main():
 
-    with open('UTDOutdoorsAB2Session2.csv', mode='r') as csv_file:
+    with open('UTDOutdoorsAB2Session4.csv', mode='r') as csv_file:
         csv_reader = csv.DictReader(csv_file)
         line_count = 1
         for row in csv_reader:

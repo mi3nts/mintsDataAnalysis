@@ -27,11 +27,11 @@ saveAllMints(dataFolder,dotMatsFolder,nodeID,"pm");
 saveAllMints(dataFolder,dotMatsFolder,nodeID,"f");
 saveAllMints(dataFolder,dotMatsFolder,nodeID,"rh");
 
-% 
-% %% For Airbeam 2 
-% nodeID          = "AB_001896107DBA";
-% saveAllMints(dataFolder,dotMatsFolder,nodeID,"pm1");
-% saveAllMints(dataFolder,dotMatsFolder,nodeID,"pm2.5");
-% saveAllMints(dataFolder,dotMatsFolder,nodeID,"pm10");
-% saveAllMints(dataFolder,dotMatsFolder,nodeID,"f");
-% saveAllMints(dataFolder,dotMatsFolder,nodeID,"rh");
+
+%% For Airbeam 2 
+nodeID          = "AB_001896107DBA";
+saveAllMints(dataFolder,dotMatsFolder,nodeID,"pm1");
+saveAllMints(dataFolder,dotMatsFolder,nodeID,"pm2.5");
+saveAllMints(dataFolder,dotMatsFolder,nodeID,"pm10");
+saveAllMints(dataFolder,dotMatsFolder,nodeID,"f");
+saveAllMints(dataFolder,dotMatsFolder,nodeID,"rh");
