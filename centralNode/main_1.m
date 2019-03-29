@@ -44,12 +44,16 @@ endDate    = datetime(2019,03,12);
 % 
 % saveAllMints(dataFolder,dotMatsFolder,nodeID,"VEML6070");
 % VEML6070TT = table2timetable(concatDotMatsMints(dotMatsFolder,nodeID,"VEML6070",startDate,endDate));
+<<<<<<< HEAD
 
 
 
 
 
 
+=======
+ 
+>>>>>>> ddce56dc5189bbdcaf3b8ca7eed557c86cf83039
 
 grimmRetime     =  retime(rmmissing(grimmTT)   ,'regular',@nanmean,'TimeStep',dt);
 OPCN3Retime     =  retime(rmmissing(OPCN3TT)   ,'regular',@nanmean,'TimeStep',dt);
@@ -74,10 +78,13 @@ mints =  rmmissing(synchronize(mints,VEML6070Retime,'intersection'));
 % end
  
 
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> ddce56dc5189bbdcaf3b8ca7eed557c86cf83039
 if( nodeID == "001e06323a06")
     deleteRangeBegin  =  datetime(2019,2,15,16,00,00,'timezone','utc');
     deleteRangeEnd    =  datetime(2019,2,16,2,00,00,'timezone','utc');
