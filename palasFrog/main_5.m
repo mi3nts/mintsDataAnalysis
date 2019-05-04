@@ -1,0 +1,34 @@
+
+clc
+
+load(strcat("mints_4_",strrep(string(dt)," ","_"),"_Chuncks.mat"));
+% %% As Is Graphs 
+mintsCT =   mints;
+
+mintsCT.dateTime.TimeZone = 'local';
+
+[weekDayNum,weekDayName] = weekday(mintsCT.dateTime);
+
+hourIn= hour(mintsCT.dateTime);
+
+mintsCT = addvars(mintsCT,weekDayNum,weekDayName,hourIn);
+
+
+byDayMints = varfun(@mean,mintsCT,'GroupingVariables','weekDayNum',...
+             'OutputFormat','table');       
+         
+figure
+bar(byDayMints{:,{'mean_pm1_grimm','mean_pm2_5_grimm','mean_pm10_grimm'}})
+legend({'PM_{1}','PM_{2.5}','PM_{10}'},'Location','eastoutside')
+xticklabels({'Sun','Mon','Tue','Wed','Thu','Fri','Sat'})
+title('PM Values Per Day')
+
+
+byHourMints = varfun(@mean,mintsCT,'GroupingVariables','hourIn',...
+             'OutputFormat','table')    
+       
+figure
+bar(byHourMints{:,{'mean_pm1_grimm','mean_pm2_5_grimm','mean_pm10_grimm'}})
+legend({'PM_{1}','PM_{2.5}','PM_{10}'},'Location','eastoutside')
+% xticklabels({'Sun','Mon','Tue','Wed','Thu','Fri','Sat'})
+title('PM Values Per Hour')
