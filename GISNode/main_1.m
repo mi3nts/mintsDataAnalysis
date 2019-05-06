@@ -138,6 +138,9 @@ eval(strcat("save('mints_1_1_central_node_data_from_",string(startDate),"_to_",s
 %  end 
 % 
 % 
-% 
+    eval(strcat("save('mints_central_node_data_from_",string(startDate),"_to_",string(endDate),"_in_",...
+       strrep(string(dt)," ","_"),"_averaged_slices_for_Node_",nodeID,"',",...
+       "'mintsCentralNodeWithGrimm','mintsCentralNodeWithPalas','mintsCentralNodeWithGrimmAndPalas','dt','startDate','endDate','nodeID')"));
+
 % 
 % 
