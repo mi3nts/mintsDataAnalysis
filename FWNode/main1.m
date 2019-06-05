@@ -5,20 +5,22 @@ clc
 clear all
 close all 
 
+addpath("../functions/")
+
 %% P1 - Specifying Parametors  
 
 % Put all data in one time table with the following headers - dateTime, pm1
 %, pm2.5 pm10 
 
-dataFolder      = "/media/teamlary/Team_Lary_1/gitGubRepos/data/mintsData";
+dataFolder      = "/media/teamlary/Team_Lary_1/gitGubRepos/data/mintsData/reference";
 dotMatsFolder   = dataFolder    +  "/dotMats";
 
-grimmDataFolder = dataFolder    +  "/Spectrometor";
-grimmDotMats    = dotMatsFolder +  "/Spectrometor";
-
-FWDataFolder = dataFolder + "/fortWorthNode/"
-
 nodeID          = "GRIMM";
+
+grimmDataFolder = dataFolder    +  "/" + nodeID;
+grimmDotMats    = dotMatsFolder +  "/" + nodeID;
+
+deliverablesFolder = dataFolder + "/deliverables/" + nodeID
 
 dtSteps = [seconds(10)]  ; 
 dt = dtSteps(1)
@@ -29,13 +31,13 @@ endDate    = datetime(2019,04,29);
 
 %% Collecting Time Tables 
 
-%saveAllGrimm(dataFolder);
-%saveAllGrimmCounts(dataFolder);
+saveAllGrimm(dataFolder);
+saveAllGrimmCounts(dataFolder);
 
 grimmTT          =  table2timetable(concatDotMatsGrimm(grimmDotMats,startDate,endDate));
 grimmCountsTT    =  table2timetable(concatDotMatsGrimmCounts(grimmDotMats,startDate,endDate));
 
 mintsGRIMM    =  retime(rmmissing(grimmTT)   ,'regular',@nanmean,'TimeStep',dt);
 
-eval(strcat("save ",FWDataFolder,"mintsFW_1_1_from_",string(startDate),"_to_",string(endDate),"_in_",strrep(string(dt)," ","_"),"_Slices_Node_",nodeID))
+eval(strcat("save ",deliverablesFolder,"mintsFW_1_1_from_",string(startDate),"_to_",string(endDate),"_in_",strrep(string(dt)," ","_"),"_Slices_Node_",nodeID))
 % 
