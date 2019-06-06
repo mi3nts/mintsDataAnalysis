@@ -13,8 +13,8 @@ addpath("../functions/")
 % Put all data in one time table with the following headers - dateTime, pm1
 %, pm2.5 pm10 
 
-% dataFolderPre      = "/home/lhw150030/mintsData"
-dataFolderPre   = "/media/teamlary/Team_Lary_2/air930/mintsData"
+dataFolderPre      = "/home/lhw150030/mintsData"
+% dataFolderPre   = "/media/teamlary/Team_Lary_2/air930/mintsData"
 dataFolder      = dataFolderPre  +  "/reference"
 % 
 % dotMatsFolder   = dataFolderPre    +  "/dotMats";
