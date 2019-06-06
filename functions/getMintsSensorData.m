@@ -12,7 +12,7 @@ function mintsData= getMintsSensorData(filename,sensor)
     firstline     = string(fgetl(fid));
     fclose(fid);
     headers       = strsplit(firstline,',') +"_"+sensor;
-    mintsData     =[array2table(datetime(dateTime.dateTime)),array2table(data)];
+    mintsData     =[array2table(datetime(dateTime.dateTime,'InputFormat','yyyy-MM-dd HH:mm:ss.SSSSSS')),array2table(data)];
 
     mintsData.Properties.VariableNames = strrep(headers," ","");
     mintsData.Properties.VariableNames(1) = "dateTime";

@@ -1,17 +1,17 @@
-function [] = saveAllGrimm(dataFolder)
+function [] = saveAllGrimm(dataFolder,parentFolder)
 %SAVEALLGRIM Summary of this function goes here
 %   Detailed explanation goes here
 
-dotMatFolder    = dataFolder + "/dotMats";
-grimmDataFolder = dataFolder + "/Spectrometor";
+dotMatFolder    = parentFolder + "/dotMats"
+grimmDataFolder = dataFolder + "/GRIMM"
 grimmDataAll    = dir(grimmDataFolder)
 
 grimmDataTable  = struct2table(grimmDataAll);
 grimmDataWanted = grimmDataTable(endsWith(grimmDataTable.name,'-M.dat'),:);
 
 grimmDataFiles    = string(cell2mat(grimmDataWanted.folder)) +"/"+ string(cell2mat(grimmDataWanted.name));
-saveNamesPre      = string(cell2mat(grimmDataWanted.folder)) +"/"+ strrep(string(cell2mat(grimmDataWanted.name)),"dat","mat");
-saveNamesDotMat   = strrep(saveNamesPre , "/media/teamlary/Team_Lary_1/gitGubRepos/data/mintsData", dotMatFolder);
+saveNamesPre      = string(cell2mat(grimmDataWanted.folder)) +"/"+ strrep(string(cell2mat(grimmDataWanted.name)),"dat","mat")
+saveNamesDotMat   = strrep(saveNamesPre, parentFolder,dotMatFolder)
   
 
 
