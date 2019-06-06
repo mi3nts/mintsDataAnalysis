@@ -36,6 +36,10 @@ mintsData(:,'dateStamp') = [];
 mintsData(:,'timestamp') = [];
 mintsData(:,'magVariation') = [];
 mintsData(:,'magVariationDirection') = [];
+
+mintsData.Properties.VariableNames  = strcat(mintsData.Properties.VariableNames , {'_GPSGPRMC'}) ;
+mintsData.Properties.VariableNames(1) = "dateTime";
+mintsData(1:5,:)
 end
 
 

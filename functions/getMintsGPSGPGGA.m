@@ -17,13 +17,17 @@ mintsData= readtable(filename,opts);
 clear opts;
 mintsData.dateTime =   datetime(mintsData.dateTime, 'InputFormat','yyyy-MM-dd HH:mm:ss.SSSSSS' );
 mintsData.dateTime.TimeZone = "utc";
-mintsData.latitude  =    getLatitudeUSBGPS(mintsData.latitude,mintsData.latitudeDirection)
-mintsData.longitude    = getLongitudeUSBGPS(mintsData.longitude,mintsData.longitudeDirection)
+mintsData.latitude  =    getLatitudeUSBGPS(mintsData.latitude,mintsData.latitudeDirection);
+mintsData.longitude    = getLongitudeUSBGPS(mintsData.longitude,mintsData.longitudeDirection);
 mintsData(:,'latitudeDirection') = [];
 mintsData(:,'longitudeDirection') = [];
 mintsData(:,'altitudeUnits') = [];
 mintsData(:,'undulationUnits') = [];
 mintsData(:,'age') = [];
 mintsData(:,'timestamp') = [];
+mintsData(:,'stationID') = [];
 
+ mintsData.Properties.VariableNames  = strcat(mintsData.Properties.VariableNames , {'_GPSGPGGA'}) ;
+ mintsData.Properties.VariableNames(1) = "dateTime";
+ mintsData(1:5,:)
 end
