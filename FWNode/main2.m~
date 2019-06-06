@@ -30,7 +30,7 @@ startDate  = datetime(2019,02,12) ;
 endDate    = datetime(2019,04,29);
 
 %% Collecting Time Tables 
-saveAllMints(dataFolder,dotMatsFolder,nodeID,"GPSGPRMC");
+% saveAllMints(dataFolder,dotMatsFolder,nodeID,"GPSGPRMC");
 saveAllMints(dataFolder,dotMatsFolder,nodeID,"GPSGPGGA");
 % saveAllMints(dataFolder,dotMatsFolder,nodeID,"OPCN3");
 % saveAllMints(dataFolder,dotMatsFolder,nodeID,"LIBRAD");
