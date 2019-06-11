@@ -48,7 +48,7 @@ dtSteps = [seconds(10), seconds(20), seconds(30), minutes(1), minutes(2) , minut
 
 deliverablesFolder = dataFolderPre + "/deliverables"
 
-dt = dtSteps(4)
+dt = dtSteps(1)
 
 startDate  = datetime(2019,02,12) ;
 endDate    = datetime(2019,04,29);
@@ -73,11 +73,8 @@ eval(strcat("load('",deliverablesFolder,"/mints_FW_node_3_2_data_from_",string(s
    
 %--------------------------------------------------------------------------
 %% Take a copy of the data
-% Data = mints
-Data = mints(1:1000,:);
-
-   
-   
+Data = mints
+% Data = mints(1:1000,:);
 
 ioverwrite=1;
 
@@ -319,9 +316,9 @@ for inode=1:length(nodeList)
         fn_mat=strcat(Mdl_Dir,WantedVariables{ivar},'.mat');
         fn_mat_ver=strcat(Mdl_Dir_Ver,WantedVariables{ivar},'.mat');
         fn_data=strcat(Mdl_Dir,nodeList{inode},'_Data.mat');
-        fn_scatter=strcat(CalibrationBaseDir,nodeList{inode},'/',WantedVariables{ivar},'/',nodeList{inode},'_scatter.png');
-        fn_importance=strcat(CalibrationBaseDir,nodeList{inode},'/',WantedVariables{ivar},'/',nodeList{inode},'_importance.png');
-        fn_timeseries=strcat(CalibrationBaseDir,nodeList{inode},'/',WantedVariables{ivar},'/',nodeList{inode},'_timeseries.png');
+        fn_scatter=strcat(modelsFolder,nodeList{inode},'/',WantedVariables{ivar},'/',nodeList{inode},'_scatter.png');
+        fn_importance=strcat(modelsFolder,nodeList{inode},'/',WantedVariables{ivar},'/',nodeList{inode},'_importance.png');
+        fn_timeseries=strcat(modelsFolder,nodeList{inode},'/',WantedVariables{ivar},'/',nodeList{inode},'_timeseries.png');
 
         %--------------------------------------------------------------------------
         disp('set up the machine learning inputs and outputs')
@@ -476,8 +473,7 @@ for inode=1:length(nodeList)
             )
         %strrep(Mdl.PredictorNames{isorted_imp(i)},'_',''),...
         end
-        print('-dpng',fn_importance);% save to a png file
-                
+        print('-dpng',fn_importance);% save to a png file            
 
     %--------------------------------------------------------------------------
     % Loop over Wanted Variables
