@@ -19,11 +19,11 @@ for icol=1:ncols
     % Take a copy of this coulumn
     this_col=D(:,icol);
     
-    nunique_this_col=length(unique(this_col))
+    nunique_this_col=length(unique(this_col));
     
     % Number of bins per column (variable)
-    nbins_this_column=min([nbins_per_column nunique_this_col])
-    n_per_thisbin=n_per_bin
+    nbins_this_column=min([nbins_per_column nunique_this_col]);
+    n_per_thisbin=n_per_bin;
     
     % For the output variable have more bins.
     if icol==ncols
@@ -36,7 +36,7 @@ for icol=1:ncols
         ' and choosing a representative sample. Choosing ' ...
         num2str(nbins_this_column) ' bins for this column. With ' ...
         num2str(n_per_thisbin) ' members per bin.' ...
-        ])
+        ]);
     
 
     %--------------------------------------------------------------------------
@@ -46,7 +46,7 @@ for icol=1:ncols
     % indices for the corresponding elements in X. 
     % The number of elements in the kth bin is nnz(bin==k), 
     % which is the same as N(k).
-    [N,edges,bin] = histcounts(this_col,nbins_this_column)
+    [N,edges,bin] = histcounts(this_col,nbins_this_column);
     
     % loop over the bins
     for ibin=1:nbins_this_column
@@ -82,7 +82,7 @@ end
 %--------------------------------------------------------------------------
 
 ikeepAll                     = unique(ikeepAll);
-[trainInd,valInd,testInd]    = dividerand(length(ikeepAll),1-pvalid,0,pvalid)
+[trainInd,valInd,testInd]    = dividerand(length(ikeepAll),1-pvalid,0,pvalid);
 ikeepAllTraining             = ikeepAll(trainInd) ;
 ikeepAllValidating           = ikeepAll(testInd)  ;
 

@@ -14,8 +14,8 @@ addpath("../functions/")
 %, pm2.5 pm10 
 
 dataFolderPre      = "/home/lhw150030/mintsData"
-% dataFolderPre   = "/media/teamlary/Team_Lary_2/air930/mintsData"
-dataFolder      = dataFolderPre  +  "/reference"
+% dataFolderPre    = "/media/teamlary/Team_Lary_2/air930/mintsData"
+dataFolder         = dataFolderPre  +  "/reference"
 % 
 % dotMatsFolder   = dataFolderPre    +  "/dotMats";
 % 
@@ -57,20 +57,18 @@ eval(strcat("save('",deliverablesFolder,"/mints_FW_node_3_2_data_from_",string(s
 
 
 for n=2:length(dtSteps)
-
     tic
-    dt = dtSteps(n)
+        dt = dtSteps(n)
 
-    %% Time Averaging Data
-    mints     =  retime(rmmissing(mintsAll)   ,'regular',@nanmean,'TimeStep',dt);
+        %% Time Averaging Data
+        mints     =  retime(rmmissing(mintsAll)   ,'regular',@nanmean,'TimeStep',dt);
+        eval(strcat("save('",deliverablesFolder,"/mints_FW_node_3_2_data_from_",string(startDate),"_to_",string(endDate),"_in_",...
+        strrep(string(dt)," ","_"),"_averaged_slices_for_Node_",nodeID,"',",...
+        "'mints','dt','startDate','endDate','nodeID')"))
 
-
-eval(strcat("save('",deliverablesFolder,"/mints_FW_node_3_2_data_from_",string(startDate),"_to_",string(endDate),"_in_",...
-       strrep(string(dt)," ","_"),"_averaged_slices_for_Node_",nodeID,"',",...
-       "'mints','dt','startDate','endDate','nodeID')"))
-
-clear mints
-toc
+        clear mints
+    toc
+    
 end
 
 

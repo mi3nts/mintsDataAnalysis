@@ -1,5 +1,3 @@
-
-
 %% MAIN 4:  Doing the calibration 
 
 
@@ -37,3 +35,8 @@ endDate    = datetime(2019,04,29);
 eval(strcat("load('",deliverablesFolder,"/mints_FW_node_3_2_data_from_",string(startDate),"_to_",string(endDate),"_in_",...
        strrep(string(dt)," ","_"),"_averaged_slices_for_Node_",nodeID,"')"))
    
+%    
+% nodeID          = "GRIMM";
+% 
+% eval(strcat("load('",deliverablesFolder,"/mints_FW_node_2_2_data_from_",string(startDate),"_to_",string(endDate),"_in_",...
+%        strrep(string(dt)," ","_"),"_averaged_slices_for_Node_",nodeID,"')"))
