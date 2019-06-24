@@ -32,12 +32,12 @@ startDate  = datetime(2019,02,12) ;
 endDate    = datetime(2019,04,29);
 
 %% Loading Grimm Data 
-nodeID          = "GRIMM";
+nodeIDGRIMM          = "GRIMM";
 eval(strcat("load('",deliverablesFolder,"/mints_FW_node_1_2_data_from_",string(startDate),"_to_",string(endDate),"_in_",...
-        strrep(string(dt)," ","_"),"_averaged_slices_for_Node_",nodeID,"')"))
+        strrep(string(dt)," ","_"),"_averaged_slices_for_Node_",nodeIDGRIMM,"')"))
 
 %% Loading Node Data 
-nodeID          = "001e06323a06";
+% nodeID          = "001e06323a06";
 
 eval(strcat("load('",deliverablesFolder,"/mints_FW_node_2_2_data_from_",string(startDate),"_to_",string(endDate),"_in_",...
         strrep(string(dt)," ","_"),"_averaged_slices_for_Node_",nodeID,"')"))

@@ -29,7 +29,7 @@ dtSteps = [seconds(10)]  ;
 dt = dtSteps(1)
 dmSteps = [minutes(5), minutes(10)]  ; 
 
-startDate  = datetime(2019,02,12) ;
+startDate  = datetime(2019,04,28) ;
 endDate    = datetime(2019,04,29);
 
 %% Collecting Time Tables 
@@ -50,7 +50,6 @@ mintsGrimm =  rmmissing(synchronize(GRIMMRetime,GRIMMCountsRetime,'intersection'
 fileNameIn  = strcat("mintsFW_1_1_from_",string(startDate),"_to_",string(endDate),"_in_",strrep(string(dt)," ","_"),"_Slices_Node_",nodeID)
 
 saveAllData(deliverablesFolder,fileNameIn)
-
 
 eval(strcat("save('",deliverablesFolder,"/mints_FW_node_1_2_data_from_",string(startDate),"_to_",string(endDate),"_in_",...
        strrep(string(dt)," ","_"),"_averaged_slices_for_Node_",nodeID,"',",...

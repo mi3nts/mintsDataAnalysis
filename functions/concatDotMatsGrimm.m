@@ -22,7 +22,7 @@ function grimmDataAll = concatDotMatsGrimm(dotMatsFolder,startDate,endDate)
     grimmDataAll = [];
     
     for n =1:length(duration)   
-        fileName = dotMatsFolder+ "/Spectrometor_"+ num2str(year(duration(n)),'%04.f')+"-" +num2str(month(duration(n)),'%02.f')+"-"+num2str(day(duration(n)),'%02.f')+"-M.mat"  ;
+        fileName = dotMatsFolder+ "/Spectrometor_"+ num2str(year(duration(n)),'%04.f')+"-" +num2str(month(duration(n)),'%02.f')+"-"+num2str(day(duration(n)),'%02.f')+"-M.mat"  
         if (exist(fileName , 'file') == 2)
                 load(fileName) 
                 grimmDataAll = [grimmDataAll; grimmData];

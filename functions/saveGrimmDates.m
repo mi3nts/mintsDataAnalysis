@@ -16,7 +16,7 @@ datesAll = startDate:days(1):endDate ;
 
 dotMatFolder    = parentFolder + "/dotMats"
 grimmDataFolder = dataFolder + "/GRIMM"
-grimmDataAll    = dir(grimmDataFolder)
+grimmDataAll    = dir(grimmDataFolder);
 
 grimmDataTable  = struct2table(grimmDataAll);
 grimmDataWanted = grimmDataTable(endsWith(grimmDataTable.name,'-M.dat'),:);
