@@ -1,20 +1,8 @@
-close all 
-clearvars -except dataFolderPre dataFolder nodeIDGrimm dataFolderGrimm mintsDotMats nodeID deliverablesFolder dtSteps dt dmSteps startDate endDate grimmDotMats mintsDotMats
-
-%% Main2 - Save Mints Data 
-
-% Collecting and Saving GRIMM Time Tables 
-
-saveMintsDates(dataFolder,mintsDotMats,nodeID,"GPSGPRMC",startDate,endDate);
-saveMintsDates(dataFolder,mintsDotMats,nodeID,"GPSGPGGA",startDate,endDate);
-saveMintsDates(dataFolder,mintsDotMats,nodeID,"OPCN3",startDate,endDate);
-saveMintsDates(dataFolder,mintsDotMats,nodeID,"LIBRAD",startDate,endDate);
-saveMintsDates(dataFolder,mintsDotMats,nodeID,"BME280",startDate,endDate);
-saveMintsDates(dataFolder,mintsDotMats,nodeID,"MGS001",startDate,endDate);
-saveMintsDates(dataFolder,mintsDotMats,nodeID,"SCD30",startDate,endDate);
-saveMintsDates(dataFolder,mintsDotMats,nodeID,"TSL2591",startDate,endDate);
-saveMintsDates(dataFolder,mintsDotMats,nodeID,"VEML6070",startDate,endDate);
-
+function mints = getDailyDataForFW(givenDate,nodeID,mintsDotMats,dt)
+%GETDAILYDATAFORFW Summary of this function goes here
+%   Detailed explanation goes here
+startDate = givenDate;
+endDate   = givenDate;
 
 GPSGPRMCTT = table2timetable(concatDotMatsMints(mintsDotMats,nodeID,"GPSGPRMC",startDate,endDate));
 GPSGPGGATT = table2timetable(concatDotMatsMints(mintsDotMats,nodeID,"GPSGPGGA",startDate,endDate));
@@ -25,9 +13,6 @@ MGS001TT   = table2timetable(concatDotMatsMints(mintsDotMats,nodeID,"MGS001",sta
 SCD30TT    = table2timetable(concatDotMatsMints(mintsDotMats,nodeID,"SCD30",startDate,endDate));
 TSL2591TT  = table2timetable(concatDotMatsMints(mintsDotMats,nodeID,"TSL2591",startDate,endDate));
 VEML6070TT = table2timetable(concatDotMatsMints(mintsDotMats,nodeID,"VEML6070",startDate,endDate));
-
-fileNameIn  = strcat("mints_node_2_1_data_from_",string(startDate),"_to_",string(endDate),"_as_is_data_Node_",nodeID);
-saveAllData(deliverablesFolder,fileNameIn)
 
  
    %% Time Averaging Data
@@ -52,17 +37,5 @@ saveAllData(deliverablesFolder,fileNameIn)
     mints =  rmmissing(synchronize(mints,TSL2591Retime,'intersection'));
     mints =  rmmissing(synchronize(mints,VEML6070Retime,'intersection'));
 
-    if( nodeID == "001e06323a06")
-        deleteRangeBegin  =  datetime(2019,2,15,16,00,00,'timezone','utc');
-        deleteRangeEnd    =  datetime(2019,2,16,2,00,00,'timezone','utc');
-        mints(mints.dateTime>deleteRangeBegin&mints.dateTime<deleteRangeEnd,:) = []  ;
-        deleteRangeEnd  =  datetime(2019,2,12,12,00,00,'timezone','utc');
-        mints(mints.dateTime<deleteRangeEnd,:) = []  ;   
-    end
+end
 
-
-eval(strcat("save('",deliverablesFolder,"/mints_node_2_2_data_from_",string(startDate),"_to_",string(endDate),"_in_",...
-       strrep(string(dt)," ","_"),"_averaged_slices_for_Node_",nodeID,"',",...
-       "'mints','dt','startDate','endDate','nodeID')"))
-
-   
