@@ -36,7 +36,17 @@ function mintsDataAll = concatDotMatsMints(dotMatsFolder,nodeID,sensor,startDate
         clearvars mintsData 
 
     end 
-
-
+% 
+%     
+    
+    if((sensor=="OPCN3")&& ~isempty(mintsDataAll) )
+%        mintsDataAll(1:5,:)
+        mintsDataAll(mintsDataAll.valid_OPCN3==0,:)     = [];
+        mintsDataAll(mintsDataAll.binCount0_OPCN3==0,:) = [];
+%         mintsDataAll(1:5,:)
+    end
+    
+%     
+    
 
 end

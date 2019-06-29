@@ -12,19 +12,28 @@ dataFolderPre   = "/media/teamlary/Team_Lary_2/air930/mintsData"
 dtSteps = [seconds(30)]  
 
 deliverablesFolder = dataFolderPre + "/deliverables"
+calibratedFolder   = dataFolderPre + "/calibrated"
 
-startDate          = datetime(2019,05,01) ;
-endDate            = datetime(2019,05,02);
+
+startDate          = datetime(2019,05,1) ;
+endDate            = datetime(2019,05,2);
 
 nodeID             = "001e06323a06";
 modelsFolderPre    =  deliverablesFolder + "/models"
 dataFolder           = dataFolderPre + "/raw";
 mintsDotMats  = dataFolderPre +  "/dotMats/raw" ;
 datesIn = startDate:days(1):endDate;
-    
+
+saveAllInRange = true
+
+
 dt = seconds(30);
 
-   nodeList={...
+VersionSt = "Version_RE_2019_06_12";
+
+modelsFolder = modelsFolderPre +"/"+strrep(string(dt)," ","")+"/"
+
+    nodeList={...
         nodeID ...
         };
 
@@ -234,35 +243,142 @@ dt = seconds(30);
         'UV Light Level VEML6070',...
         };
 
+    
+    
+wantedOut = {...
+          'latitude_GPSGPGGA' ,...
+          'longitude_GPSGPGGA' ,...
+          'longitude_GPSGPGGA' ,...
+          'altitude_GPSGPGGA',...
+          'temperature_BME280',...
+          'pressure_BME280',...
+          'humidity_BME280',...         
+          'binCount0_OPCN3',...
+          'binCount1_OPCN3',...
+          'binCount2_OPCN3',...
+          'binCount3_OPCN3',...
+          'binCount4_OPCN3',...
+          'binCount5_OPCN3',...
+          'binCount6_OPCN3',...
+          'binCount7_OPCN3',...
+          'binCount8_OPCN3',...
+          'binCount9_OPCN3',...
+          'binCount10_OPCN3',...
+          'binCount11_OPCN3',...
+          'binCount12_OPCN3',...
+          'binCount13_OPCN3',...
+          'binCount14_OPCN3',...
+          'binCount15_OPCN3',...
+          'binCount16_OPCN3',...
+          'binCount17_OPCN3',...
+          'binCount18_OPCN3',...
+          'binCount19_OPCN3',...
+          'binCount20_OPCN3',...
+          'binCount21_OPCN3',...
+          'binCount22_OPCN3',...
+          'binCount23_OPCN3',...
+          'pm1_predicted_RF',...
+          'pm2_5_predicted_RF',...
+          'pm10_predicted_RF',...
+          'alveolic_predicted_RF',...
+          'thoracic_predicted_RF',...
+          'inhalable_predicted_RF',...
+          };
 
-% saveMintsDates(dataFolder,mintsDotMats,nodeID,"GPSGPRMC",startDate,endDate);
-% saveMintsDates(dataFolder,mintsDotMats,nodeID,"GPSGPGGA",startDate,endDate);
-% saveMintsDates(dataFolder,mintsDotMats,nodeID,"OPCN3",startDate,endDate);
-% saveMintsDates(dataFolder,mintsDotMats,nodeID,"LIBRAD",startDate,endDate);
-% saveMintsDates(dataFolder,mintsDotMats,nodeID,"BME280",startDate,endDate);
-% saveMintsDates(dataFolder,mintsDotMats,nodeID,"MGS001",startDate,endDate);
-% saveMintsDates(dataFolder,mintsDotMats,nodeID,"SCD30",startDate,endDate);
-% saveMintsDates(dataFolder,mintsDotMats,nodeID,"TSL2591",startDate,endDate);
-% saveMintsDates(dataFolder,mintsDotMats,nodeID,"VEML6070",startDate,endDate);  
-%     
-for dateNow = 1:length(datesIn)
-% Loop over dates
-    givenDate = datesIn(dateNow)
-    for inode=1:length(nodeList)
-    % Loop over Nodes  
-         mints = getDailyDataForFW(givenDate,nodeID,mintsDotMats,dt);
-                    
-             % Loop over Wanted Variables
-             for ivar=1:length(WantedVariables)
-                
-                                 
-                 
-               
-               
-            end
-             
-    end
-        
-end 
-
-
+      
+ %% main1 : Save all Dotmats at Once
+ if(saveAllInRange)
+    mainDaily1_saveAllTimeRangeData;
+     
+ end    
+    
+ %% main2 : Produce All UTC Outputs
+ 
+ mainDaily2_getCalibratedResultsUTC
+ 
+ 
+    
+ %% main3 : Produce All CDT Outputs
+ 
+ mainDaily3_getCalibratedResultsCDT
+ 
+ 
+ 
+ 
+      
+% % saveMintsDates(dataFolder,mintsDotMats,nodeID,"GPSGPRMC",startDate,endDate);
+% % saveMintsDates(dataFolder,mintsDotMats,nodeID,"GPSGPGGA",startDate,endDate);
+% % saveMintsDates(dataFolder,mintsDotMats,nodeID,"OPCN3",startDate,endDate);
+% % saveMintsDates(dataFolder,mintsDotMats,nodeID,"LIBRAD",startDate,endDate);
+% % saveMintsDates(dataFolder,mintsDotMats,nodeID,"BME280",startDate,endDate);
+% % saveMintsDates(dataFolder,mintsDotMats,nodeID,"MGS001",startDate,endDate);
+% % saveMintsDates(dataFolder,mintsDotMats,nodeID,"SCD30",startDate,endDate);
+% % saveMintsDates(dataFolder,mintsDotMats,nodeID,"TSL2591",startDate,endDate);
+% % saveMintsDates(dataFolder,mintsDotMats,nodeID,"VEML6070",startDate,endDate);  
+% %     
+% % fn_mat_ver=strcat(Mdl_Dir_Ver,WantedVariables{ivar},'.mat');
+%             
+% for dateNow = 1:length(datesIn)
+% % Loop over dates
+% 
+%  
+%     givenDate = datesIn(dateNow)
+%     for inode=1:length(nodeList)      
+%     % Loop over Nodes  
+% %             saveMintsDates(dataFolder,mintsDotMats,nodeID,"GPSGPRMC",givenDate,givenDate);
+% %             saveMintsDates(dataFolder,mintsDotMats,nodeID,"GPSGPGGA",givenDate,givenDate);
+% %             saveMintsDates(dataFolder,mintsDotMats,nodeID,"OPCN3",givenDate,givenDate);
+% %             saveMintsDates(dataFolder,mintsDotMats,nodeID,"LIBRAD",givenDate,givenDate);
+% %             saveMintsDates(dataFolder,mintsDotMats,nodeID,"BME280",givenDate,givenDate);
+% %             saveMintsDates(dataFolder,mintsDotMats,nodeID,"MGS001",givenDate,givenDate);
+% %             saveMintsDates(dataFolder,mintsDotMats,nodeID,"SCD30",givenDate,givenDate);
+% %             saveMintsDates(dataFolder,mintsDotMats,nodeID,"TSL2591",givenDate,givenDate);
+% %             saveMintsDates(dataFolder,mintsDotMats,nodeID,"VEML6070",givenDate,givenDate); 
+% 
+%             mints = getDailyDataForFW(givenDate,nodeID,mintsDotMats,dt);
+%             if(~isempty(mints))
+%                    calibrated = mints;
+%                    command=strcat(';In=[');
+%                    for iname=1:length(RegressionVariables)
+%                        command=strcat(command,'mints.',RegressionVariables{iname}," ");
+%                    end        
+%                    command=strcat(command,'];whos In Out');
+%                    disp(command);
+%                    eval(command);
+% 
+%                          % Loop over Wanted Variables
+%                    for ivar=1:length(WantedVariables)
+%                         Mdl_Dir=strcat(modelsFolder,nodeList{inode},"/",WantedVariables{ivar}, "/");
+%                         Mdl_Dir_Ver=strcat(Mdl_Dir,VersionSt,"/");
+%                         disp(Mdl_Dir_Ver);
+% 
+%                         Mdl_Dir_Ver=strcat(Mdl_Dir,VersionSt,"/");
+%                         fn_mat_ver = strcat(Mdl_Dir_Ver,WantedVariables{ivar},'.mat');
+%                         load(fn_mat_ver);
+%                         predictedLabel= strrep(WantedVariables{ivar},"grimm","predicted_RF");
+%                         command = strcat("calibrated.",predictedLabel,"= predict(Mdl,In);");
+%                         eval(command) 
+%                    end
+% 
+% %                     outCalibrated            = calibrated(:,wantedOut);
+% %                     printCSVDaily(calibrated,wantedOut,calibratedFolder,nodeID,givenDate,"_calibrated_")    
+% %                     drawAllTimeSeriesPlots(calibrated,nodeID,givenDate,calibratedFolder)
+%                     drawContourPlot(calibrated,nodeID,{"UTC Time(hours)";string(givenDate)},...
+%                                                        "Particle Diametors(\mum)",...
+%                                                        "Particle Size Distribution",...
+%                                                        givenDate,...
+%                                                        calibratedFolder,...
+%                                                        "Contour_UTC_Time"...
+%                                                        )
+% 
+%                     clear calibraed mdl 
+%             end % Check If data is Available
+%             
+%     end% Loop over Nodes
+%    
+% end % Loop over Dates 
+% 
+% 
+% 
+% 
+% 

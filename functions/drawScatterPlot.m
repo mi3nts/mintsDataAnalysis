@@ -1,4 +1,4 @@
-function [] = drawScatterPlot(dataX,dataY,limit,nodeID,estimator, summary)
+function [] = drawScatterPlot(dataX,dataY,limit,nodeID,estimator,summary)
 %GETMINTSDATAFILES Summary of this function goes here
 %   Detailed explanation goes here
 % As Is Graphs 
